@@ -7,13 +7,18 @@ import (
 )
 
 func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
 	// define routes and corresponding handlers
 	http.HandleFunc("/goto", gotoHandler)
 	http.HandleFunc("/return", returnHandler)
 
 	// start the server and listen for incoming requests
-	fmt.Println("Server listening on port 8080...")
-	http.ListenAndServe(":8080", nil)
+	fmt.Printf("Server listening on port %s...\n", port)
+	http.ListenAndServe(":"+port, nil)
 }
 
 func gotoHandler(w http.ResponseWriter, r *http.Request) {

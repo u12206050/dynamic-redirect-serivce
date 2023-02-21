@@ -62,14 +62,17 @@ func returnHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	source := cookie.Value
+
 	// clear the "source" cookie
 	cookie.MaxAge = -1
+	cookie.Value = ""
 	http.SetCookie(w, cookie)
 
 	// redirect to the "source" URL
-	http.Redirect(w, r, cookie.Value, http.StatusSeeOther)
+	http.Redirect(w, r, source, http.StatusSeeOther)
 
-	fmt.Printf("Redirecting %v to %v (source=%v)\n", r.RemoteAddr, cookie.Value, cookie.Value)
+	fmt.Printf("Redirecting %v to (source=%v)\n", r.RemoteAddr, source)
 }
 
 func validateURLParam(r *http.Request, paramName string) (string, error) {

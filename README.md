@@ -4,7 +4,7 @@ goto is a simple HTTP server for redirecting users to a target URL and storing a
 
 Mostly useful to use between services that do not support dynamic redirects.
 
-### Usage
+## Usage
 
 Redirect your users to the service at the `goto` route.
 
@@ -13,3 +13,9 @@ Redirect your users to the service at the `goto` route.
 On the other service, setup such that redirects happen back to the `return` route.
 
   https://goto.io/return
+
+
+## Development
+
+ - To start server: `go run goto.go`
+ - To run tests: `go test`

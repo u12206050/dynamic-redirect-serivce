@@ -55,10 +55,10 @@ func returnHandler(w http.ResponseWriter, r *http.Request) {
 	// get the "source" cookie
 	cookie, err := r.Cookie("source")
 
-	// if the cookie is not set, return a 400 bad request error
+	// if the cookie is not set, redirect back to the domain where the request is coming from
 	if err != nil {
-		http.Error(w, "Missing source cookie", http.StatusBadRequest)
 		fmt.Printf("Bad request from %v: missing source cookie\n", r.RemoteAddr)
+		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
 

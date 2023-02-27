@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"net/http"
 	"net/url"
+	"os"
 )
 
 func main() {
@@ -58,7 +58,7 @@ func returnHandler(w http.ResponseWriter, r *http.Request) {
 	// if the cookie is not set, redirect back to the domain where the request is coming from
 	if err != nil {
 		fmt.Printf("Bad request from %v: missing source cookie\n", r.RemoteAddr)
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, r.Referer(), http.StatusSeeOther)
 		return
 	}
 
